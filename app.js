@@ -33,17 +33,17 @@ function askUserForManagerInfo() {
        },
        { 
         type: "input",
-        message: "What is your manager's office numer?",
-        name: "office number",
+        message: "What is your manager's office number?",
+        name: "officenumber",
        },
       
 
     // returns resolution of the prommise, accept the response
    ]).then(( managerData) => {
-       const newManager = new Manager (managerData.name, manager.Data.id, managerData.email );
+       const newManager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officenumber );
 
        employeeList.push(newManager);
-       askUserForRmployeeType()
+       askUserForEmployeeType()
 });
 
 }
@@ -58,8 +58,14 @@ function askUserForEmployeeType() {
            },
  
      // returns resolution of the prommise, accept the response
-    ]).then(( response) => {
+    ]).then(( newEmployeeChoiceData) => {
+        // If user selects a new Engineer
+        askUserForEngineerInfo();
+        //Else if the user selected a new Intern
+        askUserForInternInfo()
+        //else 
         
+        createHtmlFile();
  });
 }
 //ask user for engineer info
@@ -90,6 +96,10 @@ function askUserForEngineerInfo() {
  
      // returns resolution of the prommise, accept the response
     ]).then(( engineerData) => {
+        const newEngineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.GitHub );
+
+       employeeList.push(newEngineer);
+       askUserForEmployeeType()
         
  });
 }
@@ -122,11 +132,31 @@ function askUserForInternInfo() {
  
      // returns resolution of the prommise, accept the response
     ]).then(( internData) => {
-        
+        const newIntern = new Intern(internData.name, internData.id, internData.email, internData.school );
+
+       employeeList.push(newIntern);
+       askUserForEmployeeType()
+           
  });
 }
 
+function createHtmlFile() {
 
+    const htmlContent = render( employeeList );
+    // use FS module to create the output file
+
+}
+
+askUserForManagerInfo();
+
+// try{
+//     fs.writeFileSync('team.html', html)
+//     console.log('Success')
+// }catch(err){
+//     console.error(err)
+// }
+
+//     generateFile();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)

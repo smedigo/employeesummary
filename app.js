@@ -14,7 +14,7 @@ const employeeList = [];
 
 // ask user manager info
 
-function askUserForManagerType() {
+function askUserForManagerInfo() {
    return inquirer.prompt([
        {
          message:"Ask a question" , 
@@ -23,7 +23,7 @@ function askUserForManagerType() {
        }
 
 
-
+    // returns resolution of the prommise, accept the response
    ]).then(( managerData) => {
        const newManager = new Manager (managerData.name, manager.Data.id, managerData.email );
 
@@ -34,11 +34,54 @@ function askUserForManagerType() {
 }
 // ask user for next employee type
 
-function askUserForRmployeeType() {
-
+function askUserForEmployeeType() {
+    return inquirer.prompt([
+        {
+          message:"Ask a question" , 
+         name:"replaceMe",
+            type:"input"
+        }
+ 
+ 
+     // returns resolution of the prommise, accept the response
+    ]).then(( response) => {
+        
+ });
 }
 //ask user for engineer info
+
+function askUserForEngineerInfo() {
+    return inquirer.prompt([
+        {
+          message:"Ask a question" , 
+         name:"replaceMe",
+            type:"input"
+        }
+ 
+ 
+     // returns resolution of the prommise, accept the response
+    ]).then(( response) => {
+        
+ });
+}
+
 //ask user for intern info
+function askUserForInternInfo() {
+    return inquirer.prompt([
+        {
+          message:"Ask a question" , 
+         name:"replaceMe",
+            type:"input"
+        }
+ 
+ 
+     // returns resolution of the prommise, accept the response
+    ]).then(( response) => {
+        
+ });
+}
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)

@@ -15,134 +15,156 @@ const employeeList = [];
 // ask user manager info
 
 function askUserForManagerInfo() {
-   return inquirer.prompt([
-       {
-        type: "input",
-        message: "What is your manager's name?",
-        name: "name",
-       },
-       { 
-        type: "input",
-        message: "What is your manager's id??",
-        name: "id",
-       },
-       { 
-        type: "input",
-        message: "What is your manager's email?",
-        name: "email",
-       },
-       { 
-        type: "input",
-        message: "What is your manager's office number?",
-        name: "officenumber",
-       },
-      
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is your manager's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is your manager's id??",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "What is your manager's email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is your manager's office number?",
+            name: "officenumber",
+        },
 
-    // returns resolution of the prommise, accept the response
-   ]).then(( managerData) => {
-       const newManager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officenumber );
 
-       employeeList.push(newManager);
-       askUserForEmployeeType()
-});
+        // returns resolution of the prommise, accept the response
+    ]).then((managerData) => {
+        const newManager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officenumber);
+
+        employeeList.push(newManager);
+        askUserForEmployeeType()
+    });
 
 }
 // ask user for next employee type
 
 function askUserForEmployeeType() {
     return inquirer.prompt([
-        { 
-            type: "input",
+        {
+            type: "list",
             message: "What type of team memeber would you like to add?",
             name: "member",
-           },
- 
-     // returns resolution of the prommise, accept the response
-    ]).then(( newEmployeeChoiceData) => {
+            choices:["Engineer", "Intern", "Manager", "None"]
+        },
+
+        // returns resolution of the prommise, accept the response
+    ]).then((newEmployeeChoiceData) => {
         // If user selects a new Engineer
-        askUserForEngineerInfo();
-        //Else if the user selected a new Intern
-        askUserForInternInfo()
+       
+            
+            if (newEmployeeChoiceData.member === 'Engineer') {
+                console.log(newEmployeeChoiceData);
+                askUserForEngineerInfo();
+            
+        }
+        // else if the user selects new intern
+        
+            if (newEmployeeChoiceData.member === 'Intern') {
+
+                askUserForInternInfo();
+                console.log(newEmployeeChoiceData);
+                askUserForInternInfo();
+            }
+        
+
         //else 
         
-        createHtmlFile();
- });
-}
+            if (newEmployeeChoiceData.member === 'none') {
+
+                createHtmlFile();
+                console.log(newEmployeeChoiceData);
+                createHtmlFile()
+            };
+
+        });
+    }
+
 //ask user for engineer info
 
 function askUserForEngineerInfo() {
     return inquirer.prompt([
-        { 
+        {
             type: "input",
             message: "What is your engineer's name?",
             name: "name",
         },
-        { 
+        {
             type: "input",
             message: "What is your engineer's id?",
             name: "id",
         },
-        { 
+        {
             type: "input",
             message: "What is your engineer's email?",
             name: "email",
         },
-        { 
+        {
             type: "input",
             message: "What is your engineer's GitHub username?",
             name: "GitHub",
         },
-        
- 
-     // returns resolution of the prommise, accept the response
-    ]).then(( engineerData) => {
-        const newEngineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.GitHub );
 
-       employeeList.push(newEngineer);
-       askUserForEmployeeType()
-        
- });
+
+        // returns resolution of the prommise, accept the response
+    ]).then((engineerData) => {
+        const newEngineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.GitHub);
+
+        employeeList.push(newEngineer);
+        askUserForEmployeeType()
+
+    });
 }
 
 //ask user for intern info
 function askUserForInternInfo() {
     return inquirer.prompt([
-        { 
+        {
             type: "input",
             message: "What is your intern's name?",
             name: "name",
-        }, 
-        { 
+        },
+        {
             type: "input",
             message: "What is your intern's id?",
             name: "id",
         },
-        { 
+        {
             type: "input",
             message: "What is your intern's email?",
             name: "email",
-        },   
-        { 
+        },
+        {
             type: "input",
             message: "What is your intern's school?",
             name: "school",
-        },  
-        
- 
- 
-     // returns resolution of the prommise, accept the response
-    ]).then(( internData) => {
-        const newIntern = new Intern(internData.name, internData.id, internData.email, internData.school );
+        },
 
-       employeeList.push(newIntern);
-       askUserForEmployeeType()
-           
- });
+
+
+        // returns resolution of the prommise, accept the response
+    ]).then((internData) => {
+        const newIntern = new Intern(internData.name, internData.id, internData.email, internData.school);
+
+        employeeList.push(newIntern);
+        askUserForEmployeeType()
+
+    });
 }
 
 function createHtmlFile() {
 
-    const htmlContent = render( employeeList );
+    const htmlContent = render(employeeList);
     // use FS module to create the output file
     fs.writeFile(outputPath, htmlContent, (err) => {
         if (err) throw err;
@@ -154,7 +176,7 @@ askUserForManagerInfo();
 
 
 
-//     generateFile();
+  generateFile();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)

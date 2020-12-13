@@ -144,17 +144,15 @@ function createHtmlFile() {
 
     const htmlContent = render( employeeList );
     // use FS module to create the output file
-
+    fs.writeFile(outputPath, htmlContent, (err) => {
+        if (err) throw err;
+        console.log(employeeList);
+    })
 }
 
 askUserForManagerInfo();
 
-// try{
-//     fs.writeFileSync('team.html', html)
-//     console.log('Success')
-// }catch(err){
-//     console.error(err)
-// }
+
 
 //     generateFile();
 

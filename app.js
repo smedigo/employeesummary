@@ -74,17 +74,17 @@ function askUserForEmployeeType() {
 
                 askUserForInternInfo();
                 console.log(newEmployeeChoiceData);
-                askUserForInternInfo();
+                
             }
         
 
         //else 
         
-            if (newEmployeeChoiceData.member === 'none') {
+            if (newEmployeeChoiceData.member === 'None') {
 
                 createHtmlFile();
                 console.log(newEmployeeChoiceData);
-                createHtmlFile()
+                
             };
 
         });
@@ -176,7 +176,7 @@ askUserForManagerInfo();
 
 
 
-  generateFile();
+  // generateFile();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)

@@ -23,7 +23,7 @@ function askUserForManagerInfo() {
         },
         {
             type: "input",
-            message: "What is your manager's id??",
+            message: "What is your manager's id?",
             name: "id",
         },
         {
